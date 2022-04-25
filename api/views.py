@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Note
-from .serializers import NoteSerializer
+from .models import Note, Pokemon
+from .serializers import NoteSerializer, PokemonSerializer
 
 # Create your views here.
 
@@ -39,6 +39,24 @@ def getRoutes(request):
             'method': 'DELETE',
             'body': None,
             'description': 'Deletes and exiting note'
+        },
+        {
+            'Endpoint': '/pokemon/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns an array of pokemon'
+        },
+         {
+            'Endpoint': '/pokemon/id',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single pokemon object'
+        },
+        {
+            'Endpoint': '/pokemon/search/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns list of pokemon names and ids'
         },
     ]
 
@@ -81,3 +99,23 @@ def deleteNote(request, pk):
     note = Note.objects.get(id=pk)
     note.delete()
     return Response('Note was deleted!')
+
+#Pokemon views
+
+@api_view(['GET'])
+def getPokemon(request):
+    pokemon = Pokemon.objects.all()
+    serializer = PokemonSerializer(pokemon, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getSinglePokemon(request, pk):
+    pokemon = Pokemon.objects.get(id=pk)
+    serializer = PokemonSerializer(pokemon, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def searchPokemon(request):
+    pokemonNames = Pokemon.objects.values_list('id', 'name')
+    serializer = PokemonSerializer(pokemonNames, many=True)
+    return Response(serializer.data)

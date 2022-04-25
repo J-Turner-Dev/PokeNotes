@@ -9,4 +9,9 @@ urlpatterns = [
     path('notes/<str:pk>/delete/', views.deleteNote, name="delete-note"),
 
     path('notes/<str:pk>/', views.getNote, name="note"),
+
+    path('pokemon/', views.getPokemon, name="pokemon"),
+    path('pokemon/search/', views.searchPokemon, name="pokemon-search"),
+
+    path('pokemon/<str:pk>/', views.getSinglePokemon, name="single-pokemon"),
 ]
