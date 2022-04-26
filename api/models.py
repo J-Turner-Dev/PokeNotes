@@ -25,6 +25,7 @@ class Pokemon(models.Model):
     special = models.IntegerField(null=True, blank=True)
     speed = models.IntegerField(null=True, blank=True)
     fieldnotes = models.TextField(null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

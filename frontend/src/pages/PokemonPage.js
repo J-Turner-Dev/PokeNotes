@@ -8,24 +8,19 @@ const PokemonPage = () => {
   let params = useParams();
   let [pokemon, setPokemon] = useState(null);
   let navigate = useNavigate();
-  let imgString = null;
 
   useEffect(() => {
     getPokemon();
   }, [params.id]);
 
   let getPokemon = async () => {
-    if (params.id === "new") return;
     let response = await fetch(`/api/pokemon/${params.id}/`);
     let data = await response.json();
     setPokemon(data);
-    console.log("Pokemon", data);
-    imgString = "../assets/" + data.number + ".png";
-    console.log("Image Name", imgString);
   };
 
   let handleSubmit = () => {
-    navigate("/");
+    navigate("/pokemon");
   };
 
   return (
@@ -36,8 +31,17 @@ const PokemonPage = () => {
         </h3>
         <button>&#9782; Field Notes</button>
       </div>
-      {imgString !== null ? <p>loading</p> : <PokeImage src={imgString} />}
-      {pokemon?.name}
+      <PokeImage alt={pokemon?.name} imageSrc={pokemon?.image} />
+      <h1>{pokemon?.name}</h1>
+      <p>{pokemon?.classification}</p>
+      <p>{pokemon?.poketype}</p>
+      <p>{pokemon?.height}</p>
+      <p>{pokemon?.weight}</p>
+      <p>Hitpoints: {pokemon?.hitpoints}</p>
+      <p>Attack: {pokemon?.attack}</p>
+      <p>Defense: {pokemon?.defense}</p>
+      <p>Special: {pokemon?.special}</p>
+      <p>Speed: {pokemon?.speed}</p>
     </div>
   );
 };

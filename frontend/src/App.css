@@ -295,3 +295,24 @@ a {
   font-size: 18px;
   cursor: pointer;
 }
+
+/*==============================
+=>  Menu Button
+================================*/
+
+.menu-list {
+  position: absolute;
+  background-color: var(--color-dark);
+  color: var(--color-bg);
+  right: 500px;
+}
+
+.menu-list li {
+  list-style-type: none;
+}
+
+.menu-list li:hover {
+  opacity: .6;
+  background-color: black;
+  color: white;
+}
