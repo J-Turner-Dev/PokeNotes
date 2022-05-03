@@ -7,6 +7,8 @@ import img058 from "../assets/058.png";
 import img059 from "../assets/059.png";
 import img135 from "../assets/135.png";
 import img151 from "../assets/151.png";
+import img050 from "../assets/050.png";
+import img094 from "../assets/094.png";
 
 const images = {
   img001,
@@ -18,6 +20,8 @@ const images = {
   img059,
   img135,
   img151,
+  img050,
+  img094,
 };
 
 function GetImage(key) {

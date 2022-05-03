@@ -4,3 +4,7 @@ Using Python Django to build a server for collecting and comparing in formation 
 
 Progress so far... Django Backend and Rest framework setup
 ![Preview](PokeNotesPreview0.PNG?raw=true)
+
+Front-End Set up with React, Pokemon Profile Pages, Notes, and Search Function added
+
+![Preview](PokeNotesPreview01.PNG?raw=true)

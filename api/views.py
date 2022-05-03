@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Note, Pokemon
 from .serializers import NoteSerializer, PokemonSerializer
+from .utils import searchFunction
 
 # Create your views here.
 
@@ -60,8 +61,8 @@ def getRoutes(request):
         },
         {
             'Endpoint': '/pokemon/search2/',
-            'method': 'GET',
-            'body': None,
+            'method': 'PUT',
+            'body': {'body': ""},
             'description': 'Returns list of pokemon names and ids'
         },
     ]
@@ -126,8 +127,8 @@ def searchPokemon(request):
     #serializer = PokemonSerializer(pokemonNames, many=True)
     return Response(pokemonNames)
 
-@api_view(['GET'])
+@api_view(['PUT'])
 def searchPokemonTwo(request):
-    pokemonNames = Pokemon.objects.values_list('id', 'name')
+    pokemonNames = searchFunction(request.data)
     #serializer = PokemonSerializer(pokemonNames, many=True)
     return Response(pokemonNames)

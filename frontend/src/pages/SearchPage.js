@@ -6,6 +6,8 @@ import { FaSearch } from "react-icons/fa";
 const SearchPage = () => {
   let [names, setNames] = useState([]);
   let [results, setResults] = useState([]);
+  let [search, setSearch] = useState("");
+  let [filterState, setFilterState] = useState(false);
 
   useEffect(() => {
     getNames();
@@ -13,6 +15,19 @@ const SearchPage = () => {
 
   let getNames = async () => {
     let response = await fetch("/api/pokemon/search/");
+    let data = await response.json();
+    setNames(data);
+    setResults(data);
+  };
+
+  let updateNames = async () => {
+    let response = await fetch(`/api/pokemon/search2/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(search),
+    });
     let data = await response.json();
     setNames(data);
     setResults(data);
@@ -33,12 +48,23 @@ const SearchPage = () => {
     <div className="notes">
       <div className="notes-header">
         <h2 className="notes-title">
-          <FaSearch />{" "}
+          <button onClick={() => updateNames()}>
+            <FaSearch />{" "}
+          </button>
           <textarea
             onChange={(e) => {
-              handleChange(e.target.value);
+              filterState
+                ? handleChange(e.target.value)
+                : setSearch(e.target.value);
+              setSearch(e.target.value);
             }}
           ></textarea>
+          <button
+            onClick={() => setFilterState(!filterState)}
+            className={filterState ? "filter-active" : "filter-inactive"}
+          >
+            Filter
+          </button>
         </h2>
         <p className="notes-count">{results.length}</p>
       </div>
