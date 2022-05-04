@@ -21,13 +21,7 @@ const SearchPage = () => {
   };
 
   let updateNames = async () => {
-    let response = await fetch(`/api/pokemon/search2/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(search),
-    });
+    let response = await fetch(`/api/pokemon/search2/${search}`);
     let data = await response.json();
     setNames(data);
     setResults(data);
@@ -48,23 +42,25 @@ const SearchPage = () => {
     <div className="notes">
       <div className="notes-header">
         <h2 className="notes-title">
-          <button onClick={() => updateNames()}>
-            <FaSearch />{" "}
-          </button>
-          <textarea
-            onChange={(e) => {
-              filterState
-                ? handleChange(e.target.value)
-                : setSearch(e.target.value);
-              setSearch(e.target.value);
-            }}
-          ></textarea>
-          <button
-            onClick={() => setFilterState(!filterState)}
-            className={filterState ? "filter-active" : "filter-inactive"}
-          >
-            Filter
-          </button>
+          <div className="search">
+            <textarea
+              onChange={(e) => {
+                filterState
+                  ? handleChange(e.target.value)
+                  : setSearch(e.target.value);
+                setSearch(e.target.value);
+              }}
+            ></textarea>
+            <button onClick={() => updateNames()}>
+              <FaSearch />
+            </button>
+            <button
+              onClick={() => setFilterState(!filterState)}
+              className={filterState ? "filter-active" : "filter-inactive"}
+            >
+              Filter
+            </button>
+          </div>
         </h2>
         <p className="notes-count">{results.length}</p>
       </div>

@@ -60,9 +60,9 @@ def getRoutes(request):
             'description': 'Returns list of pokemon names and ids'
         },
         {
-            'Endpoint': '/pokemon/search2/',
-            'method': 'PUT',
-            'body': {'body': ""},
+            'Endpoint': '/pokemon/search2/sch',
+            'method': 'GET',
+            'body': None,
             'description': 'Returns list of pokemon names and ids'
         },
     ]
@@ -124,11 +124,9 @@ def getSinglePokemon(request, pk):
 @api_view(['GET'])
 def searchPokemon(request):
     pokemonNames = Pokemon.objects.values_list('id', 'name')
-    #serializer = PokemonSerializer(pokemonNames, many=True)
     return Response(pokemonNames)
 
-@api_view(['PUT'])
-def searchPokemonTwo(request):
-    pokemonNames = searchFunction(request.data)
-    #serializer = PokemonSerializer(pokemonNames, many=True)
+@api_view(['GET'])
+def searchPokemonTwo(request, sch):
+    pokemonNames = searchFunction(sch)
     return Response(pokemonNames)

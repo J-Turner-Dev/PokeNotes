@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('pokemon/', views.getPokemon, name="pokemon"),
     path('pokemon/search/', views.searchPokemon, name="pokemon-search"),
-    path('pokemon/search2/', views.searchPokemonTwo, name="pokemon-search-backend"),
+    path('pokemon/search2/<str:sch>/', views.searchPokemonTwo, name="pokemon-search-backend"),
 
     path('pokemon/<str:pk>/', views.getSinglePokemon, name="single-pokemon"),
 ]

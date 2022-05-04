@@ -8,7 +8,7 @@ const MenuButton = () => {
   return (
     <div>
       <span className="menu-button" onClick={() => setActive(!active)}>
-        &#9776;
+        <div className="menu-select">&#9776;</div>
         {active && (
           <div className="menu">
             <div className="menu-list">
